@@ -44,22 +44,17 @@ public class SwerveModule extends SubsystemBase {
   private double m_simTurnAngleIncrement;
   Pose2d m_pose;
 
-  SimpleMotorFeedforward feedforward =
-          new SimpleMotorFeedforward(
-                  ksDriveVoltSecondsPerMeter,
-                  kaDriveVoltSecondsSquaredPerMeter,
-                  kvDriveVoltSecondsSquaredPerMeter);
+  SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(ksDriveVoltSecondsPerMeter,
+      kaDriveVoltSecondsSquaredPerMeter, kvDriveVoltSecondsSquaredPerMeter);
 
-  private final ProfiledPIDController m_turningPIDController
-          = new ProfiledPIDController(1, 0, 0,
-          new TrapezoidProfile.Constraints(2 * Math.PI, 2 * Math.PI));
+  private final ProfiledPIDController m_turningPIDController = new ProfiledPIDController(1, 0, 0,
+      new TrapezoidProfile.Constraints(2 * Math.PI, 2 * Math.PI));
 
-  public SwerveModule(
-          int moduleNumber,
-          CANSparkMax turnMotor,
-          CANSparkMax driveMotor,
-          CANCoder angleEncoder,
-          double angleOffset) {
+  public SwerveModule(int moduleNumber,
+      CANSparkMax turnMotor,
+      CANSparkMax driveMotor,
+      CANCoder angleEncoder,
+      double angleOffset) {
     m_moduleNumber = moduleNumber;
     m_turnMotor = turnMotor;
     m_driveMotor = driveMotor;
@@ -107,7 +102,7 @@ public class SwerveModule extends SubsystemBase {
   }
 
   public double getHeadingDegrees() {
-    if(RobotBase.isReal())
+    if (RobotBase.isReal())
       return m_turnEncoder.getPosition();
     else
       return m_currentAngle;
@@ -118,13 +113,14 @@ public class SwerveModule extends SubsystemBase {
   }
 
   public double getDriveMeters() {
-    if(RobotBase.isReal())
+    if (RobotBase.isReal())
       return m_driveEncoder.getPosition();
     else
       return m_simDriveEncoderPosition;
   }
+
   public double getDriveMetersPerSecond() {
-    if(RobotBase.isReal())
+    if (RobotBase.isReal())
       return m_driveEncoder.getVelocity();
     else
       return m_simDriveEncoderVelocity;
@@ -136,35 +132,35 @@ public class SwerveModule extends SubsystemBase {
     if (isOpenLoop) {
       double percentOutput = desiredState.speedMetersPerSecond / kMaxSpeedMetersPerSecond;
       m_driveMotor.set(percentOutput);
-    } else {
+    }
+    else {
       int DRIVE_PID_SLOT = RobotBase.isReal() ? VEL_SLOT : SIM_SLOT;
-      m_driveController.setReference(
-              desiredState.speedMetersPerSecond,
-              CANSparkMax.ControlType.kVelocity,
-              DRIVE_PID_SLOT
-      );
+      m_driveController.setReference(desiredState.speedMetersPerSecond,
+          CANSparkMax.ControlType.kVelocity,
+          DRIVE_PID_SLOT);
     }
 
-    double angle =
-            (Math.abs(desiredState.speedMetersPerSecond) <= (kMaxSpeedMetersPerSecond * 0.01))
-                    ? m_lastAngle
-                    : desiredState.angle.getDegrees(); // Prevent rotating module if speed is less than 1%. Prevents Jittering.
+    double angle = (Math
+        .abs(desiredState.speedMetersPerSecond) <= (kMaxSpeedMetersPerSecond * 0.01)) ? m_lastAngle
+            : desiredState.angle.getDegrees(); // Prevent rotating module if speed is less than 1%.
+                                               // Prevents Jittering.
     m_turnController.setReference(angle, CANSparkMax.ControlType.kPosition, POS_SLOT);
-
 
     if (RobotBase.isSimulation()) {
       simUpdateDrivePosition(desiredState);
-//      simTurnPosition(angle);
+      // simTurnPosition(angle);
       m_currentAngle = angle;
 
     }
   }
+
   private void simUpdateDrivePosition(SwerveModuleState state) {
     m_simDriveEncoderVelocity = state.speedMetersPerSecond;
     double distancePer20Ms = m_simDriveEncoderVelocity / 50.0;
 
     m_simDriveEncoderPosition += distancePer20Ms;
   }
+
   private void simTurnPosition(double angle) {
     if (angle != m_currentAngle && m_simTurnAngleIncrement == 0) {
       m_simAngleDifference = angle - m_currentAngle;
@@ -188,6 +184,7 @@ public class SwerveModule extends SubsystemBase {
   public SwerveModulePosition getPosition() {
     return new SwerveModulePosition(getDriveMeters(), getHeadingRotation2d());
   }
+
   public void setModulePose(Pose2d pose) {
     m_pose = pose;
   }
@@ -196,10 +193,12 @@ public class SwerveModule extends SubsystemBase {
     return m_pose;
   }
 
-  private void updateSmartDashboard() {}
+  private void updateSmartDashboard() {
+  }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+  }
 
   @Override
   public void simulationPeriodic() {

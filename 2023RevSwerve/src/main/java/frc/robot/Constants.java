@@ -20,7 +20,8 @@ import java.util.Map;
  * constants. This class should not be used for any other purpose. All constants should be declared
  * globally (i.e. public static). Do not put anything functional in this class.
  *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
+ * <p>
+ * It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
@@ -55,10 +56,10 @@ public final class Constants {
     public static final double kWheelBase = Units.inchesToMeters(30);
 
     public static final Translation2d[] kModuleTranslations = {
-            new Translation2d(kWheelBase / 2, kTrackWidth / 2),
-            new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-            new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
-            new Translation2d(-kWheelBase / 2, -kTrackWidth / 2)
+        new Translation2d(kWheelBase / 2, kTrackWidth / 2),
+        new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
+        new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
+        new Translation2d(-kWheelBase / 2, -kTrackWidth / 2)
     };
 
     public static final double frontLeftCANCoderOffset = 94.219;
@@ -66,8 +67,8 @@ public final class Constants {
     public static final double backLeftCANCoderOffset = 284.590;
     public static final double backRightCANCoderOffset = 179.648;
 
-    public static final SwerveDriveKinematics kSwerveKinematics =
-        new SwerveDriveKinematics(kModuleTranslations);
+    public static final SwerveDriveKinematics kSwerveKinematics = new SwerveDriveKinematics(
+        kModuleTranslations);
 
     public static final double kMaxSpeedMetersPerSecond = Units.feetToMeters(18);
     public static final double kMaxRotationRadiansPerSecond = Math.PI * 2.0;
@@ -80,9 +81,8 @@ public final class Constants {
     public static final double kP_Theta = 8;
     public static final double kD_Theta = 0;
 
-    public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
-        new TrapezoidProfile.Constraints(
-            kMaxRotationRadiansPerSecond, kMaxRotationRadiansPerSecondSquared);
+    public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
+        kMaxRotationRadiansPerSecond, kMaxRotationRadiansPerSecondSquared);
 
     public static final class Module {
       public static final double kDriveMotorGearRatio = 6.12;
@@ -94,12 +94,10 @@ public final class Constants {
       public static final DCMotor kDriveGearbox = DCMotor.getNEO(1);
       public static final DCMotor kTurnGearbox = DCMotor.getNEO(1);
 
-      public static final double kDriveRevToMeters =
-              ((kWheelDiameterMeters * Math.PI) / kDriveMotorGearRatio);
-      public static final double kDriveRpmToMetersPerSecond =
-              kDriveRevToMeters / 60.0;
-      public static final double kTurnRotationsToDegrees =
-              360.0 / kTurningMotorGearRatio;
+      public static final double kDriveRevToMeters = ((kWheelDiameterMeters * Math.PI)
+          / kDriveMotorGearRatio);
+      public static final double kDriveRpmToMetersPerSecond = kDriveRevToMeters / 60.0;
+      public static final double kTurnRotationsToDegrees = 360.0 / kTurningMotorGearRatio;
       public static final double kTurningEncoderDistancePerPulse = 360.0 / kCANCoderCPR;
 
       public static final double ksDriveVoltSecondsPerMeter = 0.667 / 12;
@@ -109,18 +107,14 @@ public final class Constants {
       public static final double kvTurnVoltSecondsPerRadian = 1.47; // originally 1.5
       public static final double kaTurnVoltSecondsSquaredPerRadian = 0.348; // originally 0.3
     }
-    
+
     public enum ModulePosition {
-      FRONT_LEFT,
-      FRONT_RIGHT,
-      BACK_LEFT,
-      BACK_RIGHT
+      FRONT_LEFT, FRONT_RIGHT, BACK_LEFT, BACK_RIGHT
     }
   }
 
   // 1 = closed-loop control (using sensor feedback) and 0 = open-loop control (no sensor feedback)
   public enum CONTROL_MODE {
-    OPENLOOP,
-    CLOSEDLOOP
+    OPENLOOP, CLOSEDLOOP
   }
 }

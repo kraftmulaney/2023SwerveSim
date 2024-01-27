@@ -37,14 +37,10 @@ public class RobotContainer {
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
-            // The left stick controls translation of the robot.
-            // Turning is controlled by the X axis of the right stick.
-            new SetSwerveDrive(
-                    m_robotDrive,
-                    ()-> leftJoystick.getY(),
-                    ()-> leftJoystick.getX(),
-                    ()-> rightJoystick.getX(),
-                    false));
+        // The left stick controls translation of the robot.
+        // Turning is controlled by the X axis of the right stick.
+        new SetSwerveDrive(m_robotDrive, () -> leftJoystick.getY(), () -> leftJoystick.getX(),
+            () -> rightJoystick.getX(), false));
 
     m_fieldSim.initSim();
   }
@@ -71,7 +67,7 @@ public class RobotContainer {
     // An example command will be run in autonomous
     return new WaitCommand(0);
   }
-  
+
   public void periodic() {
     m_fieldSim.periodic();
   }
