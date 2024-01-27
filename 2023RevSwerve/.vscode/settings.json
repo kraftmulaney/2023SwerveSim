@@ -1,0 +1,10 @@
+{
+    "java.checkstyle.version": "10.12.0",
+    "java.checkstyle.configuration": "${workspaceFolder}\\config\\checkstyle\\checkstyle.xml",
+    "java.format.settings.profile": "RamenRobotics",
+    "java.format.settings.url": ".vscode/RamenFormatting.xml",
+    "[java]": {
+        "editor.detectIndentation": false,
+        "editor.tabSize": 2
+    }
+}
