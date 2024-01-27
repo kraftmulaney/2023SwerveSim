@@ -9,7 +9,13 @@ import com.ctre.phoenix.sensors.SensorTimeBase;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 
+/**
+ * CTRE utility functions.
+ */
 public final class CtreUtils {
+  /**
+   * TalonFXConfiguration for turn motor.
+   */
   public static TalonFXConfiguration generateTurnMotorConfig() {
     TalonFXConfiguration motorConfig = new TalonFXConfiguration();
 
@@ -27,6 +33,9 @@ public final class CtreUtils {
     return motorConfig;
   }
 
+  /**
+   * TalonFXConfiguration for drive motor.
+   */
   public static TalonFXConfiguration generateDriveMotorConfig() {
     TalonFXConfiguration motorConfig = new TalonFXConfiguration();
 
@@ -47,6 +56,9 @@ public final class CtreUtils {
     return motorConfig;
   }
 
+  /**
+   * Generate CAN config.
+   */
   public static CANCoderConfiguration generateCanCoderConfig() {
     CANCoderConfiguration sensorConfig = new CANCoderConfiguration();
 
@@ -57,6 +69,9 @@ public final class CtreUtils {
     return sensorConfig;
   }
 
+  /**
+   * Optimize swerve module state.
+   */
   public static SwerveModuleState optimize(SwerveModuleState desiredState,
       Rotation2d currentAngle) {
     double targetAngle = placeInAppropriate0To360Scope(currentAngle.getDegrees(),
@@ -71,6 +86,8 @@ public final class CtreUtils {
   }
 
   /**
+   * Ensure angle is between 0 and 360.
+   *
    * @param scopeReference Current Angle
    * @param newAngle       Target Angle
    * @return Closest angle within scope

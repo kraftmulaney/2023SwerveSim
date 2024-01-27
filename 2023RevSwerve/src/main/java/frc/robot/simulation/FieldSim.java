@@ -4,21 +4,18 @@
 
 package frc.robot.simulation;
 
+import static frc.robot.Constants.Swerve.kModuleTranslations;
+
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants.Swerve;
-import frc.robot.Constants.Swerve.ModulePosition;
 import frc.robot.subsystems.SwerveDrive;
-import frc.robot.utils.ModuleMap;
 
-import java.util.Map;
-
-import static frc.robot.Constants.Swerve.kModuleTranslations;
-
+/**
+ * Simulation of Field2d.
+ */
 public class FieldSim {
   private final SwerveDrive m_swerveDrive;
 
@@ -53,11 +50,15 @@ public class FieldSim {
     m_field2d.getObject("Swerve Modules").setPoses(m_swerveModulePoses);
   }
 
+  /**
+   * Called every robot loop.
+   */
   public void periodic() {
     updateRobotPoses();
 
-    if (RobotBase.isSimulation())
+    if (RobotBase.isSimulation()) {
       simulationPeriodic();
+    }
 
     SmartDashboard.putData("Field2d", m_field2d);
   }

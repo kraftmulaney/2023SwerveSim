@@ -5,7 +5,13 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 
+/**
+ * REV utility functions.
+ */
 public final class RevUtils {
+  /**
+   * Set turn motor config.
+   */
   public static void setTurnMotorConfig(CANSparkMax motorController) {
     motorController.getPIDController().setFF(0.0);
     motorController.getPIDController().setP(0.2);
@@ -19,6 +25,9 @@ public final class RevUtils {
     motorController.setSmartCurrentLimit(40, 25);
   }
 
+  /**
+   * Set drive motor config.
+   */
   public static void setDriveMotorConfig(CANSparkMax motorController) {
     motorController.getPIDController().setFF(0.0);
     motorController.getPIDController().setP(0.1);
@@ -35,6 +44,9 @@ public final class RevUtils {
     motorController.setOpenLoopRampRate(0.1);
   }
 
+  /**
+   * Optimize swerve module state.
+   */
   public static SwerveModuleState optimize(SwerveModuleState desiredState,
       Rotation2d currentAngle) {
     double targetAngle = placeInAppropriate0To360Scope(currentAngle.getDegrees(),
@@ -49,6 +61,8 @@ public final class RevUtils {
   }
 
   /**
+   * Ensure angle is between 0 and 360.
+   *
    * @param scopeReference Current Angle
    * @param newAngle       Target Angle
    * @return Closest angle within scope

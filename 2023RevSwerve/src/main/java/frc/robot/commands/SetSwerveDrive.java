@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SwerveDrive;
-
 import java.util.function.DoubleSupplier;
 
 /**
@@ -20,7 +19,9 @@ public class SetSwerveDrive extends CommandBase {
       "PMD.UnusedPrivateField", "PMD.SingularField"
   })
   private final SwerveDrive m_swerveDrive;
-  private final DoubleSupplier m_throttleInput, m_strafeInput, m_rotationInput;
+  private final DoubleSupplier m_throttleInput;
+  private final DoubleSupplier m_strafeInput;
+  private final DoubleSupplier m_rotationInput;
   private final boolean m_isFieldRelative;
 
   /**
@@ -56,10 +57,11 @@ public class SetSwerveDrive extends CommandBase {
     double rotation = Math.abs(m_rotationInput.getAsDouble()) > 0.05 ? m_rotationInput.getAsDouble()
         : 0;
 
-    m_swerveDrive.drive(throttle, strafe, rotation, m_isFieldRelative, false); // Forward/Back
-                                                                               // Trottle,
-                                                                               // Left/Right Strafe,
-                                                                               // Left/Right Turn
+    // Forward/Back
+    // Trottle,
+    // Left/Right Strafe,
+    // Left/Right Turn
+    m_swerveDrive.drive(throttle, strafe, rotation, m_isFieldRelative, false);
   }
 
   // Called once the command ends or is interrupted.

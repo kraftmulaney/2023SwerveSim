@@ -1,8 +1,10 @@
 package frc.robot.utils;
 
-import java.util.*;
-
 import frc.robot.Constants.Swerve.ModulePosition;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Contains functions to convert {@link Map}s with {@link ModulePosition} keys to and from arrays so
@@ -16,6 +18,7 @@ public class ModuleMap {
    *
    * <p>
    * For processing the output of a WPILib swerve function which returns an array.
+   * </p>
    *
    * @param values Must have at least as many elements as {@link ModulePosition} has entries. Any
    *               entries after will be ignored.
@@ -36,6 +39,7 @@ public class ModuleMap {
    * <p>
    * You can use this in a for/in loop without needing to supply an empty array like in {@link
    * #orderedValues(Map, Object[]) orderedValues}.
+   * </p>
    */
   public static <V> List<V> orderedValuesList(Map<ModulePosition, V> map) {
     ArrayList<V> list = new ArrayList<>();
@@ -51,6 +55,7 @@ public class ModuleMap {
    *
    * <p>
    * Useful when a WPILib swerve function requires an array as input.
+   * </p>
    *
    * @param array An array of the class to output an array of, e.g. {@code
    *     moduleTranslations.valuesArray(new Translation2d[0])}. Required because Java can't make an

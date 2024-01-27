@@ -4,16 +4,11 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import frc.robot.utils.ModuleMap;
-import java.util.Map;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -23,17 +18,24 @@ import java.util.Map;
  * <p>
  * It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
+ * </p>
  */
 public final class Constants {
 
-  public static final class USB {
+  /**
+   * Joystick ports.
+   */
+  public static final class Usb {
     public static final int leftJoystick = 0;
     public static final int rightJoystick = 1;
     public static final int xBoxController = 2;
     public static final int testController = 4;
   }
 
-  public static final class CAN {
+  /**
+   * CAN IDs.
+   */
+  public static final class Can {
     public static final int pigeon = 9;
 
     public static final int frontLeftCanCoder = 10;
@@ -51,6 +53,9 @@ public final class Constants {
     public static final int backRightTurnMotor = 27;
   }
 
+  /**
+   * Swerve constants.
+   */
   public static final class Swerve {
     public static final double kTrackWidth = Units.inchesToMeters(30);
     public static final double kWheelBase = Units.inchesToMeters(30);
@@ -81,9 +86,13 @@ public final class Constants {
     public static final double kP_Theta = 8;
     public static final double kD_Theta = 0;
 
+    @SuppressWarnings("LineLengthCheck")
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
         kMaxRotationRadiansPerSecond, kMaxRotationRadiansPerSecondSquared);
 
+    /**
+     * Swerve module-specific constants.
+     */
     public static final class Module {
       public static final double kDriveMotorGearRatio = 6.12;
       public static final double kTurningMotorGearRatio = 12.8;
@@ -108,13 +117,18 @@ public final class Constants {
       public static final double kaTurnVoltSecondsSquaredPerRadian = 0.348; // originally 0.3
     }
 
+    /**
+     * Names of the swerve module positions on the robot.
+     */
     public enum ModulePosition {
       FRONT_LEFT, FRONT_RIGHT, BACK_LEFT, BACK_RIGHT
     }
   }
 
-  // 1 = closed-loop control (using sensor feedback) and 0 = open-loop control (no sensor feedback)
-  public enum CONTROL_MODE {
+  /**
+   * 1 = closed-loop control (using sensor feedback) and 0 = open-loop control (no sensor feedback).
+   */
+  public enum ControlMode {
     OPENLOOP, CLOSEDLOOP
   }
 }

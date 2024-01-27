@@ -6,14 +6,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.Usb;
 import frc.robot.commands.SetSwerveDrive;
 import frc.robot.simulation.FieldSim;
 import frc.robot.subsystems.SwerveDrive;
-import frc.robot.Constants.USB;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,8 +26,8 @@ public class RobotContainer {
 
   private final FieldSim m_fieldSim = new FieldSim(m_robotDrive);
 
-  static Joystick leftJoystick = new Joystick(USB.leftJoystick);
-  static Joystick rightJoystick = new Joystick(USB.rightJoystick);
+  static Joystick leftJoystick = new Joystick(Usb.leftJoystick);
+  static Joystick rightJoystick = new Joystick(Usb.rightJoystick);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
