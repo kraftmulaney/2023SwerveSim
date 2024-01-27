@@ -27,7 +27,7 @@ public class RobotContainer {
   private final FieldSim m_fieldSim = new FieldSim(m_robotDrive);
 
   static Joystick leftJoystick = new Joystick(Usb.leftJoystick);
-  static Joystick rightJoystick = new Joystick(Usb.rightJoystick);
+  // static Joystick rightJoystick = new Joystick(Usb.rightJoystick);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -38,8 +38,8 @@ public class RobotContainer {
     m_robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
         // Turning is controlled by the X axis of the right stick.
-        new SetSwerveDrive(m_robotDrive, () -> leftJoystick.getY(), () -> leftJoystick.getX(),
-            () -> rightJoystick.getX(), false));
+        new SetSwerveDrive(m_robotDrive, () -> leftJoystick.getX(),
+            () -> leftJoystick.getY() * -1.0, () -> leftJoystick.getZ(), true));
 
     m_fieldSim.initSim();
   }
